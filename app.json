@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/camera/camera",
+    "pages/album/album",
+    "pages/editor/editor"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#09090b",
+    "navigationBarTitleText": "拍立签",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#09090b"
+  },
+  "permission": {
+    "scope.camera": {
+      "desc": "用于拍摄照片并添加标签"
+    }
+  },
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

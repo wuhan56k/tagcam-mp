@@ -1,0 +1,16 @@
+{
+  "description": "拍立签 - 拍照打标签小程序",
+  "appid": "touristappid",
+  "compileType": "miniprogram",
+  "libVersion": "latest",
+  "projectname": "tagcam",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "minified": true,
+    "postcss": true,
+    "urlCheck": false,
+    "coverView": true
+  },
+  "condition": {}
+}
