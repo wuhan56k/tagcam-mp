@@ -1,0 +1,57 @@
+<view class="page">
+  <!-- 工具栏 -->
+  <view class="toolbar">
+    <text class="count-text">共 {{photos.length}} 张{{selecting ? ' · 已选 ' + selectedCount + ' 张' : ''}}</text>
+    <view class="toolbar-btns">
+      <button wx:if="{{selecting}}" class="btn-ghost tb-btn" bindtap="toggleAll">
+        {{selectedCount === photos.length && photos.length > 0 ? '取消全选' : '全选'}}
+      </button>
+      <button class="{{selecting ? 'btn-primary' : 'btn-ghost'}} tb-btn" bindtap="toggleSelectMode">
+        {{selecting ? '完成' : '多选'}}
+      </button>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{!photos.length}}">
+    <view class="empty-title">相册还是空的</view>
+    <view class="empty-sub">回到拍照页选好标签，拍下的照片会带着标签存到这里</view>
+  </view>
+
+  <!-- 网格 -->
+  <scroll-view scroll-y class="grid-scroll" wx:else>
+    <view class="grid">
+      <view
+        wx:for="{{photos}}"
+        wx:key="id"
+        class="cell"
+        bindtap="tapCell"
+        data-id="{{item.id}}"
+      >
+        <image class="cell-img" src="{{item.path}}" mode="aspectFill" lazy-load="true" />
+        <view class="{{item.ovClass}}">
+          <text wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this" class="ov-chip" style="{{item.chipStyle}}">{{tag}}</text>
+        </view>
+        <view wx:if="{{selecting}}" class="check {{selected[item.id] ? 'check-on' : ''}}">
+          <text wx:if="{{selected[item.id]}}">✓</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar" wx:if="{{photos.length}}">
+    <button
+      wx:if="{{selecting}}"
+      class="btn-danger bar-btn"
+      disabled="{{!selectedCount}}"
+      bindtap="deleteSelected"
+    >删除（{{selectedCount}}）</button>
+    <button class="btn-primary bar-btn" disabled="{{saving || (selecting && !selectedCount)}}" bindtap="saveBatch">
+      {{saving ? '正在导出…' : (selecting ? '导出所选到相册（' + selectedCount + '）' : '全部导出到手机相册')}}
+    </button>
+  </view>
+
+  <!-- 合成画布（离屏） -->
+  <canvas type="2d" id="composeCanvas" class="offscreen"></canvas>
+</view>
