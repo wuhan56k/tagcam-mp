@@ -1,0 +1,87 @@
+<view class="page" wx:if="{{draft}}">
+  <scroll-view scroll-y class="main">
+    <!-- 预览 -->
+    <view class="preview">
+      <image class="preview-img" src="{{draft.path}}" mode="widthFix" />
+      <view class="{{ovClass}}">
+        <text wx:for="{{draft.tags}}" wx:key="*this" class="ov-chip" style="{{chipStyle}}">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 标签编辑 -->
+    <view class="section">
+      <view class="sec-title">照片标签</view>
+      <view class="tag-list">
+        <view wx:for="{{draft.tags}}" wx:key="*this" class="edit-chip" style="background:{{draft.style.color}}">
+          {{item}}
+          <text class="chip-x" bindtap="removeTag" data-tag="{{item}}">✕</text>
+        </view>
+        <view wx:if="{{!draft.tags.length}}" class="hint">暂无标签</view>
+      </view>
+      <view class="add-row">
+        <input class="add-input" placeholder="添加标签" value="{{newTag}}" bindinput="onNewTagInput" confirm-type="done" bindconfirm="addTag" />
+        <button class="btn-ghost add-btn" bindtap="addTag">＋</button>
+      </view>
+      <view class="preset-list">
+        <view
+          wx:for="{{presets}}"
+          wx:key="*this"
+          wx:if="{{draft.tags.indexOf(item) < 0}}"
+          class="preset-chip"
+          bindtap="addTag"
+          data-tag="{{item}}"
+        >＋ {{item}}</view>
+      </view>
+    </view>
+
+    <!-- 位置 -->
+    <view class="section">
+      <view class="sec-title">标签位置</view>
+      <view class="pos-grid">
+        <view
+          wx:for="{{positions}}"
+          wx:key="key"
+          class="pos-cell {{draft.style.position === item.key ? 'pos-on' : ''}}"
+          bindtap="pickPosition"
+          data-pos="{{item.key}}"
+        >{{item.label}}</view>
+      </view>
+    </view>
+
+    <!-- 颜色 -->
+    <view class="section">
+      <view class="sec-title">标签颜色</view>
+      <view class="color-list">
+        <view
+          wx:for="{{colors}}"
+          wx:key="*this"
+          class="color-dot {{draft.style.color === item ? 'color-on' : ''}}"
+          style="background:{{item}}"
+          bindtap="pickColor"
+          data-color="{{item}}"
+        ></view>
+      </view>
+    </view>
+
+    <!-- 大小 -->
+    <view class="section">
+      <view class="sec-title">标签大小</view>
+      <slider min="20" max="70" value="{{sliderVal}}" activeColor="#f97316" block-size="20" bindchanging="onSlider" bindchange="onSlider" />
+    </view>
+
+    <!-- 备注 -->
+    <view class="section">
+      <view class="sec-title">备注</view>
+      <input class="note-input" placeholder="可填写说明文字" value="{{draft.note}}" bindinput="onNoteInput" />
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-bar">
+    <button class="btn-danger bar-btn" bindtap="remove">删除</button>
+    <button class="btn-ghost bar-btn" disabled="{{saving}}" bindtap="exportOne">导出到相册</button>
+    <button class="btn-primary bar-btn" bindtap="save">保存修改</button>
+  </view>
+
+  <canvas type="2d" id="composeCanvas" class="offscreen"></canvas>
+</view>
