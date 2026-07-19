@@ -1,0 +1,56 @@
+<view class="page">
+  <!-- 取景区 -->
+  <view class="cam-wrap">
+    <camera class="cam" device-position="{{facing}}" flash="off" binderror="onCamError">
+      <cover-view class="cam-tags" wx:if="{{active.length}}">
+        <cover-view wx:for="{{active}}" wx:key="*this" class="cam-chip">{{item}}</cover-view>
+      </cover-view>
+      <cover-view class="flip" bindtap="switchFacing">⇄</cover-view>
+    </camera>
+
+    <view class="cam-fallback" wx:if="{{camErr}}">
+      <view class="fb-text">无法打开摄像头，请检查相机权限</view>
+      <button class="btn-primary fb-btn" bindtap="importPhotos">从相册/系统相机导入</button>
+    </view>
+  </view>
+
+  <!-- 标签选择栏 -->
+  <scroll-view scroll-x class="tagbar" enhanced show-scrollbar="{{false}}">
+    <view class="tag-add" bindtap="openTagModal">＋</view>
+    <view
+      wx:for="{{presets}}"
+      wx:key="*this"
+      class="tag-item {{active.indexOf(item) >= 0 ? 'tag-on' : ''}}"
+      bindtap="toggleTag"
+      data-tag="{{item}}"
+    >{{item}}</view>
+  </scroll-view>
+
+  <!-- 快门栏 -->
+  <view class="shutter-bar">
+    <view class="side-btn" bindtap="importPhotos">导入</view>
+    <view class="shutter" bindtap="capture">
+      <view class="shutter-inner"></view>
+      <view class="count" wx:if="{{photoCount > 0}}">{{photoCount}}</view>
+    </view>
+    <view class="side-btn" bindtap="goAlbum">相册</view>
+  </view>
+
+  <!-- 标签管理弹窗 -->
+  <view class="modal-mask" wx:if="{{showTagModal}}" bindtap="closeTagModal">
+    <view class="modal" catchtap="">
+      <view class="modal-title">管理标签</view>
+      <view class="modal-row">
+        <input class="modal-input" placeholder="输入新标签，如：A区-货架01" value="{{newTag}}" bindinput="onNewTagInput" confirm-type="done" bindconfirm="addPreset" />
+        <button class="btn-primary modal-add" bindtap="addPreset">添加</button>
+      </view>
+      <view class="modal-tags">
+        <view wx:for="{{presets}}" wx:key="*this" class="modal-chip">
+          {{item}}
+          <text class="modal-x" bindtap="removePreset" data-tag="{{item}}">✕</text>
+        </view>
+        <view wx:if="{{!presets.length}}" class="modal-empty">暂无标签，先添加一个吧</view>
+      </view>
+    </view>
+  </view>
+</view>
