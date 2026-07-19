@@ -1,0 +1,99 @@
+.page { display: flex; flex-direction: column; height: 100vh; background: #000; }
+
+.cam-wrap { position: relative; flex: 1; overflow: hidden; }
+.cam { width: 100%; height: 100%; }
+
+.cam-tags {
+  position: absolute; left: 24rpx; bottom: 24rpx;
+  display: flex; flex-wrap: wrap; gap: 12rpx; max-width: 80%;
+}
+.cam-chip {
+  background: #f97316; color: #fff; opacity: 0.92;
+  padding: 8rpx 20rpx; border-radius: 999rpx;
+  font-size: 24rpx; font-weight: 600;
+}
+.flip {
+  position: absolute; top: 24rpx; right: 24rpx;
+  width: 72rpx; height: 72rpx; border-radius: 50%;
+  background: rgba(0,0,0,0.4); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 40rpx;
+}
+
+.cam-fallback {
+  position: absolute; inset: 0; z-index: 5;
+  background: #18181b;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 32rpx;
+}
+.fb-text { color: #a1a1aa; font-size: 26rpx; }
+.fb-btn { font-size: 28rpx; padding: 0 48rpx; }
+
+.tagbar {
+  background: #09090b; white-space: nowrap;
+  padding: 16rpx 20rpx 8rpx;
+}
+.tag-add {
+  display: inline-flex; width: 56rpx; height: 56rpx;
+  border: 2rpx dashed #71717a; border-radius: 50%;
+  color: #a1a1aa; align-items: center; justify-content: center;
+  font-size: 32rpx; margin-right: 16rpx; vertical-align: middle;
+}
+.tag-item {
+  display: inline-flex; align-items: center;
+  height: 56rpx; padding: 0 28rpx; margin-right: 16rpx;
+  border-radius: 999rpx; font-size: 26rpx;
+  background: #27272a; color: #d4d4d8; border: 2rpx solid #3f3f46;
+  vertical-align: middle;
+}
+.tag-on { background: #f97316; color: #fff; border-color: #f97316; }
+
+.shutter-bar {
+  background: #09090b;
+  display: flex; align-items: center; justify-content: space-around;
+  padding: 16rpx 60rpx 48rpx;
+}
+.side-btn {
+  width: 88rpx; height: 88rpx; border-radius: 50%;
+  background: #27272a; color: #d4d4d8;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26rpx;
+}
+.shutter {
+  position: relative;
+  width: 140rpx; height: 140rpx; border-radius: 50%;
+  border: 8rpx solid #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.shutter-inner { width: 112rpx; height: 112rpx; border-radius: 50%; background: #f97316; }
+.count {
+  position: absolute; top: -12rpx; right: -12rpx;
+  min-width: 44rpx; height: 44rpx; padding: 0 10rpx;
+  border-radius: 999rpx; background: #22c55e; color: #fff;
+  font-size: 22rpx; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.modal-mask {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center;
+}
+.modal {
+  width: 620rpx; background: #fff; color: #18181b;
+  border-radius: 24rpx; padding: 32rpx;
+}
+.modal-title { font-size: 32rpx; font-weight: 600; margin-bottom: 24rpx; }
+.modal-row { display: flex; gap: 16rpx; }
+.modal-input {
+  flex: 1; height: 72rpx; background: #f4f4f5;
+  border-radius: 12rpx; padding: 0 20rpx; font-size: 26rpx;
+}
+.modal-add { font-size: 26rpx; padding: 0 32rpx; line-height: 72rpx; }
+.modal-tags { display: flex; flex-wrap: wrap; gap: 16rpx; margin-top: 24rpx; }
+.modal-chip {
+  display: flex; align-items: center; gap: 10rpx;
+  background: #f4f4f5; border-radius: 999rpx;
+  padding: 10rpx 24rpx; font-size: 26rpx;
+}
+.modal-x { color: #a1a1aa; font-size: 24rpx; }
+.modal-empty { color: #a1a1aa; font-size: 26rpx; }
