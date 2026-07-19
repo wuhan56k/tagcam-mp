@@ -1,0 +1,29 @@
+page {
+  background: #09090b;
+  color: #f4f4f5;
+  font-size: 28rpx;
+}
+
+.btn-primary {
+  background: #f97316;
+  color: #fff;
+  border-radius: 999rpx;
+  font-weight: 600;
+}
+.btn-primary::after { border: none; }
+
+.btn-ghost {
+  background: #27272a;
+  color: #d4d4d8;
+  border-radius: 999rpx;
+}
+.btn-ghost::after { border: none; }
+
+.chip {
+  padding: 8rpx 24rpx;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
